@@ -1,0 +1,16 @@
+/* size and color for the navbar brand */
+nav .navbar-brand {
+    font-size: xx-large;
+}
+nav .navbar-brand .blue {
+    color: #537fbe;
+}
+/* style form-control contents */
+main .form-control {
+    display: inline-block;
+    width: auto;
+}
+main {
+    overflow-x: auto;
+    text-align: center;
+}
