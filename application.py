@@ -26,7 +26,7 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/", methods=["GET", "POST"])
 def index():
 
-    # Ensure user is logged in
+    # Ensure user is logged in first
     if session.get("user_id") is None:
         return redirect("/login")
 
@@ -53,6 +53,26 @@ def index():
     # User reached route via GET
     else:
         return render_template("index.html")
+
+
+@app.route("/book/<title>")
+def book(title):
+
+    # Ensure user is logged in first
+    if session.get("user_id") is None:
+        return redirect("/login")
+
+    # Query for book data
+    book = db.execute("SELECT * FROM books WHERE title=:title", {"title": title}).fetchone()
+    if book is None:
+        return error("Error in retrieving data")
+
+    # Query for book ratings from Goodreads API
+
+    # Query for book reviews
+
+    # Display book page for details
+    return render_template("book", book=book)
 
 
 @app.route("/login", methods=["GET", "POST"])
