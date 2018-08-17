@@ -5,13 +5,19 @@
 {% endblock %}
 
 {% block main %}
-    <h1 id="book-title">{{ book.title }}</h1>
-    <div class=".d-block">
-        <p>by {{ book.author }} </p>
-        <p>published {{ book.year }}</p>
-        <p>ISBN: {{ book.isbn }}</p>
-    </div>
-    <div class=".d-block">
-        <p>Ratings: </p>
+    <div class="text-left">
+        <h1 class="d-block">{{ book.title }}</h1>
+        <h5 class="mb-2 text-muted d-block">by {{ book.author }}</h5>
+        <hr>
+        <div class="ml-auto mt-2 d-inline-block">
+            <div class="alert alert-secondary border d-inline-block" role="alert">ISBN: {{ book.isbn }}</div>
+            <div class="alert alert-secondary border d-inline-block" role="alert">Published in {{ book.year }}</div>
+        </div>
+        <div>
+            <h5 class="mb-2 myBlue">Ratings:</h5>
+        </div>
+        <div>
+            <h5 class="mb-2 myBlue">Reviews:</h5>
+        </div>
     </div>
 {% endblock %}

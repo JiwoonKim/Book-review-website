@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block main %}
-    <h2 id="search-for">Results for: {{ search }}</h2>
+    <div class="form-group text-left">
+      <h2 class="text-left">Results for: {{ search }}</h2>
+    </div>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -15,7 +17,7 @@
       <tbody>
             {% for book in books %}
                 <tr>
-                  <td>{{ book.isbn }}</td><td><a href="/book/{{ book.title }}">{{ book.title }}</a></td><td>{{ book.author }}</td><td>{{ book.year }}</td>
+                  <td>{{ book.isbn }}</td><td><a href="/book/{{ book.isbn }}">{{ book.title }}</a></td><td>{{ book.author }}</td><td>{{ book.year }}</td>
                 </tr>
             {% endfor %}
       </tbody>

@@ -1,9 +1,11 @@
+/* define blue color*/
+.myBlue {
+    color: #537fbe;
+}
+
 /* size and color for the navbar brand */
 nav .navbar-brand {
     font-size: xx-large;
-}
-nav .navbar-brand .blue {
-    color: #537fbe;
 }
 /* style form-control contents */
 main .form-control {
@@ -20,11 +22,6 @@ main {
 }
 /* style the header for results.html */
 #search-for {
-    text-align: left;
     padding-bottom: 20px;
     color: slategray;
-}
-/* style content for book.html */
-#book-title, .d-block {
-    text-align: left;
 }
