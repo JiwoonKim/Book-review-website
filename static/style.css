@@ -14,7 +14,13 @@ main {
     overflow-x: auto;
     text-align: center;
 }
-
-footer {
+/* add padding to the footer */
+.footnote {
     padding-bottom: 48px;
+}
+/* style the header for results.html */
+#search-for {
+    text-align: left;
+    padding-bottom: 20px;
+    color: slategray;
 }

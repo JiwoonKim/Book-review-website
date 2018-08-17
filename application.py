@@ -38,16 +38,17 @@ def index():
             return error("must sumbit info of book for search")
 
         # Search for book in database
-        book = "%" + request.form.get("book") + "%"
-        books = db.execute("SELECT * FROM books WHERE (isbn LIKE :book) OR (title LIKE :book) OR (author LIKE :book)", {"book": book}).fetchall()
+        search = request.form.get("book").lower()
+        book = "%" + search + "%"
+        books = db.execute("SELECT * FROM books WHERE (LOWER(isbn) LIKE :book) OR (LOWER(title) LIKE :book) OR (LOWER(author) LIKE :book)", {"book": book}).fetchall()
 
         # if no matching results, show error message
-        if books is None:
+        if len(books) == 0:
             return error("No matching results")
 
         # if matching results, show lists of books
         else:
-            return render_template("results.html", books=books)
+            return render_template("results.html", search=search, books=books)
 
     # User reached route via GET
     else:
