@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+
+{% block main %}
+    <h1 id="book-title">{{ book.title }}</h1>
+    <div class=".d-block">
+        <p>by {{ book.author }} </p>
+        <p>published {{ book.year }}</p>
+        <p>ISBN: {{ book.isbn }}</p>
+    </div>
+    <div class=".d-block">
+        <p>Ratings: </p>
+    </div>
+{% endblock %}

@@ -24,3 +24,7 @@ main {
     padding-bottom: 20px;
     color: slategray;
 }
+/* style content for book.html */
+#book-title, .d-block {
+    text-align: left;
+}

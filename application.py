@@ -72,7 +72,7 @@ def book(title):
     # Query for book reviews
 
     # Display book page for details
-    return render_template("book", book=book)
+    return render_template("book.html", book=book)
 
 
 @app.route("/login", methods=["GET", "POST"])
