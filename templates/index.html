@@ -1,9 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-search book
+search
 {% endblock %}
 
 {% block main %}
-    index.html
+    <form action="/" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="book" placeholder="isbn, title, author" type="text"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
 {% endblock %}

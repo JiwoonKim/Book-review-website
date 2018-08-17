@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbar">
                 {% if session.user_id %}
                     <ul class="navbar-nav mr-auto mt-2">
-                        <li class="nav-item"><a class="nav-link" href="/index">Search</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/">Search</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
@@ -36,5 +36,8 @@
         <main class="container p-5">
             {% block main %}{% endblock %}
         </main>
+        <footer class="small text-center text-muted">
+            Project for <a href="https://cs50.github.io/web/">Web50</a>, extending <a href="https://cs50.harvard.edu/">Harvard's CS50</a>.
+        </footer>
     </body>
 </html>

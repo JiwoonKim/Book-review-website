@@ -26,6 +26,12 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 def index():
 
+    # Ensure user is logged in
+    if session.get("user_id") is None:
+        return redirect("/login")
+
+    #
+
     return render_template("index.html")
 
 
