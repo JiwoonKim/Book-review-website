@@ -30,9 +30,28 @@ def index():
     if session.get("user_id") is None:
         return redirect("/login")
 
-    #
+    # User reached route via POST (submitted a form)
+    if request.method == "POST":
 
-    return render_template("index.html")
+        # Ensure book is submitted
+        if not request.form.get("book"):
+            return error("must sumbit info of book for search")
+
+        # Search for book in database
+        book = "%" + request.form.get("book") + "%"
+        books = db.execute("SELECT * FROM books WHERE (isbn LIKE :book) OR (title LIKE :book) OR (author LIKE :book)", {"book": book}).fetchall()
+
+        # if no matching results, show error message
+        if books is None:
+            return error("No matching results")
+
+        # if matching results, show lists of books
+        else:
+            return render_template("results", books=books)
+
+    # User reached route via GET
+    else:
+        return render_template("index.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
