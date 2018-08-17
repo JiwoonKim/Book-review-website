@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    search results
+    Search Results
 {% endblock %}
 
 {% block main %}
@@ -15,7 +15,7 @@
       <tbody>
             {% for book in books %}
                 <tr>
-                  <td>{{ book.isbn }}</td><td>{{ book.title }}</td><td>{{ book.author }}</td><td>{{ book.year }}</td>
+                  <td>{{ book.isbn }}</td><td><a href="/book/{{ book.title }}">{{ book.title }}</a></td><td>{{ book.author }}</td><td>{{ book.year }}</td>
                 </tr>
             {% endfor %}
       </tbody>

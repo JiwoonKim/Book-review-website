@@ -40,7 +40,7 @@ def index():
         # Search for book in database
         search = request.form.get("book").lower()
         book = "%" + search + "%"
-        books = db.execute("SELECT * FROM books WHERE (LOWER(isbn) LIKE :book) OR (LOWER(title) LIKE :book) OR (LOWER(author) LIKE :book)", {"book": book}).fetchall()
+        books = db.execute("SELECT * FROM books WHERE (LOWER(isbn) LIKE :book) OR (LOWER(title) LIKE :book) OR (LOWER(author) LIKE :book) LIMIT 20", {"book": book}).fetchall()
 
         # if no matching results, show error message
         if len(books) == 0:
