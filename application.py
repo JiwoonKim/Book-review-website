@@ -47,7 +47,7 @@ def index():
 
         # if matching results, show lists of books
         else:
-            return render_template("results", books=books)
+            return render_template("results.html", books=books)
 
     # User reached route via GET
     else:
