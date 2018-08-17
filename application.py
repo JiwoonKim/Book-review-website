@@ -24,7 +24,6 @@ db = scoped_session(sessionmaker(bind=engine))
 
 
 @app.route("/")
-@login_required
 def index():
     return render_template("index.html")
 
@@ -48,6 +47,18 @@ def login():
             return error("must submit password")
 
         # Query for username and password
+        username = request.form.get("username")
+        password = request.form.get("password")
+        user_id = db.execute("SELECT id FROM users WHERE (username=:username AND password=:password)", {"username": username, "password": password}).fetchone()
+
+        # Ensure username exists and password matches
+        if user_id is None:
+            return error("user does not exist or password does not match")
+
+        # If login credentials passes, store in session
+        session["user_id"] = user_id;
+
+        return redirect("/")
 
         # Ensure username exists and password is correct
     else:
@@ -73,18 +84,31 @@ def register():
         # Ensure username was submitted
         if not request.form.get("username"):
             return error("must submit username")
-
         # Ensure password was sumbitted
         elif not request.form.get("password"):
             return error("must submit password")
-
         # Ensure confirmation was submitted
         elif not request.form.get("confirmation"):
             return error("must confirm password")
-
         # Ensure confirmation and password match
         elif not request.form.get("confirmation") == request.form.get("password"):
             return error("password not matching")
 
+        # Register username and password into database (w/o hashing)
+        username = request.form.get("username")
+        password = request.form.get("password")
+        db.execute("INSERT INTO users(username, password) VALUES(:username, :password)", {"username": username, "password": password})
+        db.commit()
+
+        # Log in credentials automatically
+        user_id = db.execute("SELECT id FROM users WHERE (username=:username AND password=:password)", {"username": username, "password": password}).fetchone()
+        if user_id is None:
+            return error("user does not exist or password does not match")
+        session["user_id"] = user_id;
+
+        # redirect user to login page
+        return redirect("/")
+
+    # User reached route via GET
     else:
         return render_template("register.html")
