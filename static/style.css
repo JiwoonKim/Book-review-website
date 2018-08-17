@@ -14,3 +14,7 @@ main {
     overflow-x: auto;
     text-align: center;
 }
+
+footer {
+    padding-bottom: 48px;
+}
