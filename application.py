@@ -89,10 +89,10 @@ def register():
         elif not request.form.get("password"):
             return error("must submit password")
         # Ensure confirmation was submitted
-        elif not request.form.get("confirmation"):
+        elif not request.form.get("comfirmation"):
             return error("must confirm password")
         # Ensure confirmation and password match
-        elif not request.form.get("confirmation") == request.form.get("password"):
+        elif not request.form.get("comfirmation") == request.form.get("password"):
             return error("password not matching")
 
         # Register username and password into database (w/o hashing)
