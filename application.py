@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session, render_template, request
+from flask import Flask, session, render_template, request, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -27,6 +27,9 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    """ Default page for Website
+        User is able to search for a specific book using the isbn, title, author's name
+        The results of matching books will be displayed and is clickable for more details """
 
     # Ensure user is logged in first
     if session.get("user_id") is None:
@@ -42,7 +45,8 @@ def index():
         # Search for book in database
         search = request.form.get("book").lower()
         book = "%" + search + "%"
-        books = db.execute("SELECT * FROM books WHERE (LOWER(isbn) LIKE :book) OR (LOWER(title) LIKE :book) OR (LOWER(author) LIKE :book) LIMIT 15", {"book": book}).fetchall()
+        books = db.execute(
+            "SELECT * FROM books WHERE (LOWER(isbn) LIKE :book) OR (LOWER(title) LIKE :book) OR (LOWER(author) LIKE :book) LIMIT 15", {"book": book}).fetchall()
 
         # if no matching results, show error message
         if len(books) == 0:
@@ -57,8 +61,44 @@ def index():
         return render_template("index.html")
 
 
-@app.route("/book/<isbn>", methods=["GET","POST"])
+@app.route("/api/<isbn>")
+def api(isbn):
+    """ API access to the Website
+        User may make a GET request via this route with the ISBN number
+        A JSON response of the book's details will be returned """
+
+    # Query from books table in database
+    book = db.execute("SELECT * FROM books WHERE isbn=:isbn", {"isbn": isbn}).fetchone()
+
+    # If the requested ISBN number doesn't exist in database, return error
+    if book is None:
+        return jsonify({"error": "invalid ISBN number"}), 404
+
+    else:
+        # Query for book ratings from Goodreads API
+        res = requests.get("https://www.goodreads.com/book/review_counts.json",
+                           params={"key": "lV6JRoF2Xl75SN1f9SgOmQ", "isbns": isbn})
+        if res.status_code != 200:
+            raise Exception("ERROR: API request unsuccessful.")
+        data = res.json()
+        ratings = data["books"][0]
+
+        # create JSON response and return it
+        api = jsonify({
+            "title": book.title,
+            "author": book.author,
+            "year": book.year,
+            "isbn": book.isbn,
+            "review_count": ratings["work_ratings_count"],
+            "average_score": ratings["average_rating"]
+        })
+        return api
+
+
+@app.route("/book/<isbn>", methods=["GET", "POST"])
 def book(isbn):
+    """ Page for further details of the book clicked from the search results from the / route
+        User may write one review for each book and can view the reviews and rankings """
 
     # Ensure user is logged in first
     if session.get("user_id") is None:
@@ -71,18 +111,22 @@ def book(isbn):
 
     # Query for book ratings from Goodreads API
     res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "lV6JRoF2Xl75SN1f9SgOmQ", "isbns": isbn})
+    if res.status_code != 200:
+        raise Exception("ERROR: API request unsuccessful.")
+
     data = res.json()
     ratings = data["books"][0]
 
     # Query for book reviews
-    reviews = db.execute("SELECT username, rating, review FROM reviews JOIN users ON reviews.user_id=users.id WHERE isbn=:isbn", {"isbn":isbn}).fetchall()
+    reviews = db.execute("SELECT username, rating, review FROM reviews JOIN users ON reviews.user_id=users.id WHERE isbn=:isbn", {
+        "isbn": isbn}).fetchall()
 
-    return render_template("book.html", book=book, ratings= ratings, reviews=reviews)
+    return render_template("book.html", book=book, ratings=ratings, reviews=reviews)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    """Log user in"""
+    """ User is logged in"""
 
     # Forget any user_id
     session.clear()
@@ -101,14 +145,15 @@ def login():
         # Query for username and password
         username = request.form.get("username")
         password = request.form.get("password")
-        user_id = db.execute("SELECT id FROM users WHERE (username=:username AND password=:password)", {"username": username, "password": password}).fetchone()
+        user_id = db.execute("SELECT id FROM users WHERE (username=:username AND password=:password)",
+                             {"username": username, "password": password}).fetchone()
 
         # Ensure username exists and password matches
         if user_id is None:
             return error("user does not exist or password does not match")
 
         # If login credentials passes, store in session
-        session["user_id"] = user_id;
+        session["user_id"] = user_id
 
         return redirect("/")
 
@@ -119,6 +164,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+    """ User is logged out """
 
     # Forget any user_id
     session.clear()
@@ -129,6 +175,8 @@ def logout():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """ User is able to register their own credentials
+        and is logged in automatically """
 
     # User reached route via POST
     if request.method == "POST":
@@ -149,14 +197,16 @@ def register():
         # Register username and password into database (w/o hashing)
         username = request.form.get("username")
         password = request.form.get("password")
-        db.execute("INSERT INTO users(username, password) VALUES(:username, :password)", {"username": username, "password": password})
+        db.execute("INSERT INTO users(username, password) VALUES(:username, :password)",
+                   {"username": username, "password": password})
         db.commit()
 
         # Log in credentials automatically
-        user_id = db.execute("SELECT id FROM users WHERE (username=:username AND password=:password)", {"username": username, "password": password}).fetchone()
+        user_id = db.execute("SELECT id FROM users WHERE (username=:username AND password=:password)",
+                             {"username": username, "password": password}).fetchone()
         if user_id is None:
             return error("not registered")
-        session["user_id"] = user_id;
+        session["user_id"] = user_id
 
         # redirect user to login page
         return redirect("/")
@@ -168,6 +218,8 @@ def register():
 
 @app.route("/review", methods=["POST"])
 def review():
+    """ Inserts the review data given from the /book route into the database
+        Redirects the user back to the /book route """
 
     # Ensure user is logged in first
     if session.get("user_id") is None:
@@ -192,7 +244,8 @@ def review():
     # Insert new review into database
     rating = request.form.get("rating")
     review = request.form.get("review")
-    db.execute("INSERT INTO reviews(isbn, user_id, rating, review) VALUES(:isbn, :user_id, :rating, :review)", {"isbn": isbn, "user_id": user_id, "rating": rating, "review": review})
+    db.execute("INSERT INTO reviews(isbn, user_id, rating, review) VALUES(:isbn, :user_id, :rating, :review)",
+               {"isbn": isbn, "user_id": user_id, "rating": rating, "review": review})
     db.commit()
 
     # Display the book page again
