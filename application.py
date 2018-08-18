@@ -57,12 +57,13 @@ def index():
         return render_template("index.html")
 
 
-@app.route("/book/<isbn>")
+@app.route("/book/<isbn>", methods=["GET","POST"])
 def book(isbn):
 
     # Ensure user is logged in first
     if session.get("user_id") is None:
         return redirect("/login")
+    user_id = session.get("user_id")
 
     # Query for book data
     book = db.execute("SELECT * FROM books WHERE isbn=:isbn", {"isbn": isbn}).fetchone()
@@ -77,9 +78,10 @@ def book(isbn):
     avg_rating = books["average_rating"]
 
     # Query for book reviews
+    reviews = db.execute("SELECT user_id, rating, review FROM reviews WHERE isbn=:isbn", {"isbn":isbn}).fetchall()
 
     # Display book page for details
-    return render_template("book.html", book=book, rating_count=rating_count, avg_rating=avg_rating)
+    return render_template("book.html", book=book, rating_count=rating_count, avg_rating=avg_rating, reviews=reviews)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -89,7 +91,7 @@ def login():
     # Forget any user_id
     session.clear()
 
-    # User reached route via POST (as by submitting a form via POST)
+    # User reached route via POST (submitting a form for logging in)
     if request.method == "POST":
 
         # Ensure username was submitted
@@ -166,3 +168,31 @@ def register():
     # User reached route via GET
     else:
         return render_template("register.html")
+
+
+@app.route("/review"):
+def review():
+
+    # Ensure user is logged in first
+    if session.get("user_id") is None:
+        return redirect("/login")
+    user_id = session.get("user_id")
+
+    # User reached route via POST (submitting a form for review)
+    if request.method == "POST":
+
+        # Ensure user has not already written a review
+        if db.execute("SELECT * FROM reviews WHERE isbn=:isbn AND user_id=:user_id", {"isbn": isbn, "user_id": user_id}).rowcount == 0:
+            return error("Already wrote a review!")
+
+        # Insert new review into database
+        rating = request.form.get("rating")
+        review = request.form.get("review")
+        db.execute("INSERT INTO reviews(isbn, user_id, rating, review) VALUES(:isbn, :user_id, :rating, :review)", {"isbn": isbn, "user_id": user_id, "rating": rating, "review": review})
+
+        # Display the book page again
+        return redirect("/book/<isbn>")
+
+    # User reached route via GET (through clicking on a search result)
+    else:
+        return render_template("review.html")

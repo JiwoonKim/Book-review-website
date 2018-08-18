@@ -9,18 +9,27 @@
         <h1 class="d-block">{{ book.title }}</h1>
         <h5 class="mb-2 text-muted d-block">by {{ book.author }}</h5>
         <hr>
-        <div class="ml-auto mt-2 d-inline-block">
+        <div>
             <div class="alert alert-secondary border d-inline-block" role="alert">ISBN: {{ book.isbn }}</div>
             <div class="alert alert-secondary border d-inline-block" role="alert">Published in {{ book.year }}</div>
         </div>
         <div>
             <h5 class="mb-2 myBlue d-inline-block">Ratings:</h5>
-            <h6 class="mb-2 text-secondary d-inline-block">{{ avg_rating }} </h6>
-            <span>({{ rating_count }} reviews)</span>
+            <h6 class="mb-2 d-inline-block">{{ avg_rating }} </h6>
+            <span>({{ rating_count }} ratings)</span>
         </div>
         <div>
             <h5 class="mb-2 myBlue d-inline-block">Reviews</h5>
-
+            <span>({{ rating_count }} reviews)</span>
         </div>
+        {% for review in reviews %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ review.user_id }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Rated it {{ review.rating }}</h6>
+                    <p class="card-text">{{ review.review }}</p>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
