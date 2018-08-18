@@ -75,7 +75,7 @@ def book(isbn):
     ratings = data["books"][0]
 
     # Query for book reviews
-    reviews = db.execute("SELECT user_id, rating, review FROM reviews WHERE isbn=:isbn", {"isbn":isbn}).fetchall()
+    reviews = db.execute("SELECT username, rating, review FROM reviews JOIN users ON reviews.user_id=users.id WHERE isbn=:isbn", {"isbn":isbn}).fetchall()
 
     return render_template("book.html", book=book, ratings= ratings, reviews=reviews)
 
