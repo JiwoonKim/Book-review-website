@@ -14,22 +14,42 @@
             <div class="alert alert-secondary border d-inline-block" role="alert">Published in {{ book.year }}</div>
         </div>
         <div>
-            <h5 class="mb-2 myBlue d-inline-block">Ratings:</h5>
-            <h6 class="mb-2 d-inline-block">{{ avg_rating }} </h6>
-            <span>({{ rating_count }} ratings)</span>
+            <h5 class="mb-2 myBlue d-inline-block">Rating:</h5>
+            <h6 class="mb-2 d-inline-block">{{ ratings.average_rating }} </h6>
+            <span>({{ ratings.work_ratings_count }} ratings)</span>
         </div>
         <div>
             <h5 class="mb-2 myBlue d-inline-block">Reviews</h5>
-            <span>({{ rating_count }} reviews)</span>
+            <span>({{ reviews|length }} reviews)</span>
         </div>
         {% for review in reviews %}
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ review.user_id }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Rated it {{ review.rating }}</h6>
-                    <p class="card-text">{{ review.review }}</p>
-                </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title d-inline-block">{{ review.user_id }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted d-inline-block">  rated it {{ review.rating }}</h6>
+                <p class="card-text">{{ review.review }}</p>
             </div>
+        </div>
         {% endfor %}
+        <br>
+        <div class="card border-primary">
+            <div class="card-body">
+                <h5 class="card-title">Write a review</h5>
+                <form action="/review" method="post">
+                    <div class="form-group">
+                        <span>Your Rating</span>
+                        <input autocomplete="off" autofocus class="form-control" name="rating" placeholder="1 - 5" type="number" min="1" max="5"/>
+                        <span> on </span>
+                        <select class="form-control" name="isbn">
+                            <option value="{{ book.isbn }}">{{ book.isbn }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input autocomplete="off" autofocus class="form-control review-box" name="review" placeholder="Enter your review" type="text"/>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
