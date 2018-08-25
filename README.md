@@ -1,7 +1,7 @@
 # Web50 Project 1 | Web50 프로젝트 1
 > Practicing Back-end development using Python, Flask (server framework), PostgreSQL database (+SQLAlchemy), and APIs to create a book review website.
 
-> Python, Flask, PostgreSQL 데이터베이스(+SQLAlchemy), and API를 사용하여 간단한 북리뷰 사이트를 개발해 보는 백엔드 웹 개발 연습.
+> Python, Flask, PostgreSQL 데이터베이스(+SQLAlchemy), API를 사용하여 간단한 북리뷰 사이트를 개발해 보는 백엔드 웹 개발 연습.
 
 ## Project 1: Book Review Website
 - For CS50 Web Programming with Python and JavaScript.
