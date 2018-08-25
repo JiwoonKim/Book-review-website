@@ -22,5 +22,5 @@
 - 웹사이트의 API를 만들어 GET request ("api/<isbn>")를 통해 JSON 파일을 반환하는 기능을 만듦.
 
 ## what I learned | 무엇을 배웠는가
-> Still a bit confused on whether I prefer back-end or front-end. All in all, I learned that one side alone is not sufficient since you must know both sides in order for the logic to work. Specifically, I learned how to create a logic using the routes in how the user is suppose to use and have access to pages.
+> Still a bit confused on whether I prefer back-end or front-end. All in all, I learned that one side alone is not sufficient since you must know both sides in order for the logic to work. Specifically, I learned how to create a logic using the routes in how the user is suppose to use and have access to pages (how the website as a whole should flow).
 - I learned how to use Flask as a server framework in order to direct the application's routes as well as learning how to use relational databases via PostgreSQL and how to implement it using SQLAlchemy. I also learned how to use sessions to store login credentials. Furthermore, I learned how to use third-party APIs and also create custom APIs to return JSONs.
