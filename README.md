@@ -15,7 +15,11 @@
 ## 프로젝트 1: 북리뷰 웹사이트 개발
 - 하버드의 CS50 MOOC(edX)의 Web Programming with Python and JavaScript 수업의 프로젝트 1.
 - Python과 Flask를 서버 프레임워크로 사용하여 북 리뷰 웹사이트를 개발.
-- 
+- PostgreSQL 데이터베이스를 사용하여 책의 정보(isbn, 제목, 작가, 평점)을 저장 및 검색하는 기능을 만듦.
+- 마찬가지로 PostgreSQL을 사용하여 웹사이트에서 만들어진 북 리뷰를 저장 및 검색하는 기능을 만듦.
+- Session과 데이터베이스를 사용하여 로그인 기능을 만듦.
+- Goodreads (타사 북 리뷰 웹사이트)의 API를 사용하여 평점 정보를 불러오는 기능을 만듦.
+- 웹사이트의 API를 만들어 GET request ("api/<isbn>")를 통해 JSON 파일을 반환하는 기능을 만듦.
 
 ## what I learned | 무엇을 배웠는가
 > I learned how to 
