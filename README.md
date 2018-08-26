@@ -23,4 +23,7 @@
 
 ## what I learned | 무엇을 배웠는가
 > Still a bit confused on whether I prefer back-end or front-end. All in all, I learned that one side alone is not sufficient since you must know both sides in order for the logic to work. Specifically, I learned how to create a logic using the routes in how the user is suppose to use and have access to pages (how the website as a whole should flow).
-- I learned how to use Flask as a server framework in order to direct the application's routes as well as learning how to use relational databases via PostgreSQL and how to implement it using SQLAlchemy. I also learned how to use sessions to store login credentials. Furthermore, I learned how to use third-party APIs and also create custom APIs to return JSONs.
+- learned how to use Flask as a server framework in order to direct the application's routes
+- learned how to use relational databases via PostgreSQL and how to implement it using SQLAlchemy
+- learned how to use sessions to store login credentials. 
+- learned how to use third-party APIs and also create custom APIs to return JSONs.
