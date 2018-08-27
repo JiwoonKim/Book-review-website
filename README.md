@@ -7,8 +7,7 @@
 - For CS50 Web Programming with Python and JavaScript.
 - Created a book review website using Python and Flask as the server framerwork.
 - Used PostgreSQL database (deployed in Heroku) and sessions to store login credentials.
-- Used PostgreSQL database also for storing and searching book information including the isbn, title, author, ratings.
-- Used PostgreSQL database to store and search book reviews written on the website
+- Also ssed the database for storing and searching book information including the isbn, title, author, ratings, and reviews.
 - A third-party API by Goodreads (a book review website) to use ratings on books.
 - Created a custom API for the Website so that a GET request ("api/<isbn>") returns a JSON for book details.
 
