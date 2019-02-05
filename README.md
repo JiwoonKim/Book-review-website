@@ -11,25 +11,25 @@
 - A `third-party API` by Goodreads (a book review website) to use ratings on books.
 - Created `a custom API` for the Website so that a GET request ("api/<isbn>") returns a JSON for book details.
   
-| /register | /login |
+| /login | /search |
 :-------------------------:|:-------------------------:
-<img src="screenshots/register.PNG" width="400"> | <img src="screenshots/login.PNG" width="400">
-| user can register | user can login |
+<img src="screenshots/login.PNG" width="400"> | <img src="screenshots/search0.PNG" width="400">
+| user can login | search for book by isbn, title, author |
 
-| /search | /search (by isbn) |
+| /search (by isbn) | /search (by title)  |
 :-------------------------:|:-------------------------:
-<img src="screenshots/search0.PNG" width="400"> | <img src="screenshots/search1.PNG" width="400">
-| search for book by isbn, title, author | search result by isbn |
-
-| /search (by title)  | /api/isbn |
-:-------------------------:|:-------------------------:
-<img src="screenshots/search2.PNG" width="400"> | <img src="screenshots/api.PNG" width="400">
-| search result by title | API for web application |
+<img src="screenshots/search1.PNG" width="400"> | <img src="screenshots/search2.PNG" width="400">
+|  search result by isbn | search result by title |
 
 | /book/isbn | /search (no match)  |
 :-------------------------:|:-------------------------:
 <img src="screenshots/book1.PNG" width="400"> | <img src="screenshots/result.PNG" width="400">
 | review of searched book | no match for search result |
+
+| /api/isbn |
+:-------------------------:|
+| <img src="screenshots/api.PNG" width="400">
+| API for web application |
 
 
 ## 프로젝트 1: 북리뷰 웹사이트 개발
