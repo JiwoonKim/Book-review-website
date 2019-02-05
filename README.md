@@ -24,9 +24,9 @@
 | /search (by title)  | /api/isbn |
 :-------------------------:|:-------------------------:
 <img src="screenshots/search2.PNG" width="400"> | <img src="screenshots/api.PNG" width="400">
-| search result by title | API for web applicatio |
+| search result by title | API for web application |
 
-| /book/isbn || /search (no match)  |
+| /book/isbn | /search (no match)  |
 :-------------------------:|:-------------------------:
 <img src="screenshots/book1.PNG" width="400"> | <img src="screenshots/search2.PNG" width="400">
 | review of searched book | no match for search result |
