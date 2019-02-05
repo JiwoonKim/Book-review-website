@@ -28,7 +28,7 @@
 
 | /book/isbn | /search (no match)  |
 :-------------------------:|:-------------------------:
-<img src="screenshots/book1.PNG" width="400"> | <img src="screenshots/search2.PNG" width="400">
+<img src="screenshots/book1.PNG" width="400"> | <img src="screenshots/result.PNG" width="400">
 | review of searched book | no match for search result |
 
 
