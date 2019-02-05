@@ -13,12 +13,33 @@
 
 ## 프로젝트 1: 북리뷰 웹사이트 개발
 - 하버드의 CS50 MOOC(edX)의 Web Programming with Python and JavaScript 수업의 프로젝트 1.
-- Python과 Flask를 서버 프레임워크로 사용하여 북 리뷰 웹사이트를 개발.
-- PostgreSQL 데이터베이스를 사용하여 책의 정보(isbn, 제목, 작가, 평점)을 저장 및 검색하는 기능을 만듦.
+- Python과 `Flask`를 서버 프레임워크로 사용하여 북 리뷰 웹사이트를 개발.
+- `PostgreSQL` 데이터베이스를 사용하여 책의 정보(isbn, 제목, 작가, 평점)을 저장 및 검색하는 기능을 만듦.
 - 마찬가지로 PostgreSQL을 사용하여 웹사이트에서 만들어진 북 리뷰를 저장 및 검색하는 기능을 만듦.
-- Session과 데이터베이스를 사용하여 로그인 기능을 만듦.
-- Goodreads (타사 북 리뷰 웹사이트)의 API를 사용하여 평점 정보를 불러오는 기능을 만듦.
+- `Session`과 데이터베이스를 사용하여 로그인 기능을 만듦.
+- Goodreads (타사 북 리뷰 웹사이트)의 `API`를 사용하여 평점 정보를 불러오는 기능을 만듦.
 - 웹사이트의 API를 만들어 GET request ("api/<isbn>")를 통해 JSON 파일을 반환하는 기능을 만듦.
+  
+| /register | /login |
+:-------------------------:|:-------------------------:
+<img src="screenshots/register.PNG" width="400"> | <img src="screenshots/login.PNG" width="400">
+| user can register | user can login |
+
+| /search | /search (by isbn) |
+:-------------------------:|:-------------------------:
+<img src="screenshots/search0.PNG" width="400"> | <img src="screenshots/search1.PNG" width="400">
+| search for book by isbn, title, author | search result by isbn |
+
+| /search (by title)  | /book/<isbn> |
+:-------------------------:|:-------------------------:
+<img src="screenshots/search2.PNG" width="400"> | <img src="screenshots/book1.PNG" width="400">
+| search result by title | review of searched book |
+
+| /search (no match)  | /api/<isbn> |
+:-------------------------:|:-------------------------:
+<img src="screenshots/result.PNG" width="400"> | <img src="screenshots/api.PNG" width="400">
+| no match for search result | API for web application |
+
 
 ## what I learned | 무엇을 배웠는가
 > Still a bit confused on whether I prefer back-end or front-end. Still, I learned that one side alone is not sufficient since you must know both sides in order for the logic to work. Specifically, I learned how to create a logic using the routes in how the user is suppose to use and have access to pages (how the website as a whole should flow).
