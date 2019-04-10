@@ -1,10 +1,10 @@
-# Web50 Project 1 | Web50 프로젝트 1
+# Book Review Website
 > Practicing Back-end development using Python, Flask (server framework), PostgreSQL database (+SQLAlchemy), and APIs to create a book review website.
 
 > Python, Flask, PostgreSQL 데이터베이스(+SQLAlchemy), API를 사용하여 간단한 북리뷰 사이트를 개발해 보는 백엔드 웹 개발 연습.
 
-## Project 1: Book Review Website
-- For CS50 Web Programming with Python and JavaScript.
+## Book Review Website
+- For CS50 Web Programming with Python and JavaScript - project 1.
 - Created a book review website using Python and `Flask` as the server framerwork.
 - Used `PostgreSQL database` (deployed in `Heroku`) and `sessions` to store login credentials.
 - Also ssed the database for storing and searching book information including the isbn, title, author, ratings, and reviews.
@@ -32,7 +32,7 @@
 | API for web application |
 
 
-## 프로젝트 1: 북리뷰 웹사이트 개발
+## 북리뷰 웹사이트 개발
 - 하버드의 CS50 MOOC(edX)의 Web Programming with Python and JavaScript 수업의 프로젝트 1.
 - Python과 `Flask`를 서버 프레임워크로 사용하여 북 리뷰 웹사이트를 개발.
 - `PostgreSQL` 데이터베이스를 사용하여 책의 정보(isbn, 제목, 작가, 평점)을 저장 및 검색하는 기능을 만듦.
