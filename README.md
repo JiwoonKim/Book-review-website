@@ -1,9 +1,9 @@
-# Book Review Website
+# Book Review Website :books:
 > Practicing Back-end development using Python, Flask (server framework), PostgreSQL database (+SQLAlchemy), and APIs to create a book review website.
 
 > Python, Flask, PostgreSQL 데이터베이스(+SQLAlchemy), API를 사용하여 간단한 북리뷰 사이트를 개발해 보는 백엔드 웹 개발 연습.
 
-## Book Review Website
+## :open_book: Book Review Website
 - For CS50 Web Programming with Python and JavaScript - project 1.
 - Created a book review website using Python and `Flask` as the server framerwork.
 - Used `PostgreSQL database` (deployed in `Heroku`) and `sessions` to store login credentials.
@@ -32,7 +32,7 @@
 | API for web application |
 
 
-## 북리뷰 웹사이트 개발
+## :open_book: 북리뷰 웹사이트 개발
 - 하버드의 CS50 MOOC(edX)의 Web Programming with Python and JavaScript 수업의 프로젝트 1.
 - Python과 `Flask`를 서버 프레임워크로 사용하여 북 리뷰 웹사이트를 개발.
 - `PostgreSQL` 데이터베이스를 사용하여 책의 정보(isbn, 제목, 작가, 평점)을 저장 및 검색하는 기능을 만듦.
@@ -42,7 +42,7 @@
 - `웹사이트의 API`를 만들어 GET request ("api/<isbn>")를 통해 JSON 파일을 반환하는 기능을 만듦.
 
 
-## what I learned | 무엇을 배웠는가
+## :seedling: what I learned | 무엇을 배웠는가
 > Still a bit confused on whether I prefer back-end or front-end. Still, I learned that one side alone is not sufficient since you must know both sides in order for the logic to work. 
 
 > Specifically, I learned how to create a logic using the routes in how the user is suppose to use and have access to pages (how the website as a whole should flow).
